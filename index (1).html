@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>For Riya — From Mayank 💖</title>
+<style>
+  /* --- Old pookie-style look & feel --- */
+  :root{
+    --bg1:#fff2f8; --bg2:#e8fbff;
+    --pink1:#ff6ea3; --pink2:#ff3e96;
+    --muted:#6b5160;
+    --card:#fffefc;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%; margin:0; font-family: "Segoe UI", Roboto, "Noto Sans", system-ui, -apple-system;}
+  body{
+    background: radial-gradient(900px 600px at 10% 10%, rgba(255,230,245,.9), transparent 40%),
+                linear-gradient(135deg,var(--bg1), var(--bg2));
+    -webkit-font-smoothing:antialiased;
+    display:flex; align-items:center; justify-content:center; padding:28px;
+  }
+
+  /* container */
+  .wrap{
+    width:min(980px, 96vw);
+    background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(255,255,255,.9));
+    border-radius:28px;
+    box-shadow: 0 30px 70px rgba(20,10,30,.10);
+    padding:28px;
+    position:relative;
+    overflow:hidden;
+  }
+
+  header{display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:8px}
+  .brand{display:flex; gap:12px; align-items:center}
+  .badge{background:linear-gradient(90deg,#fff,#fff0); padding:8px 12px; border-radius:999px; font-weight:800; box-shadow:0 18px 40px rgba(20,10,30,.06)}
+  .from{background:linear-gradient(90deg,#ffd8ea,#ffc9f0); padding:8px 12px; border-radius:14px; font-weight:900; color:#5a0836}
+
+  h1{font-size:clamp(26px,5.4vw,44px); margin:6px 0; color:#2d1730; letter-spacing:.4px}
+  h1 .riya{color:var(--pink2); text-shadow:0 10px 30px rgba(255,110,163,.08)}
+
+  .sub{color:var(--muted); margin:6px 0 14px}
+
+  /* buttons */
+  .actions{display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin:12px 0}
+  .btn{
+    border: none; cursor:pointer; padding:12px 18px; border-radius:999px; font-weight:900;
+    background: linear-gradient(90deg,var(--pink1),var(--pink2)); color:white; letter-spacing:0.4px;
+    box-shadow: 0 14px 36px rgba(255,50,120,.12);
+    transition: transform .18s cubic-bezier(.2,.9,.25,1), box-shadow .18s;
+  }
+  .btn.secondary{ background: linear-gradient(90deg,#ffd9b3,#ffb3d6); color:#4b2030; box-shadow:0 14px 36px rgba(255,150,120,.08);}
+  .btn.ghost{ background:transparent; border:2px dashed rgba(0,0,0,.06); color:var(--muted); box-shadow:none; font-weight:800}
+
+  .btn:active{ transform:translateY(2px) scale(.995) }
+
+  /* content area */
+  .cardArea{margin-top:18px; min-height:180px; display:flex; align-items:center; justify-content:center}
+  .cardBox{width:100%; padding:18px; border-radius:16px; background:var(--card); box-shadow: 0 20px 40px rgba(20,10,30,.05); color:#2b2430; text-align:left}
+
+  /* proposal block */
+  .proposal{display:none; font-weight:800; font-size:18px; line-height:1.4; text-align:center; color:#3a2b3a; padding:12px}
+
+  /* falling/emojis */
+  .fall-wrap{position:fixed; inset:0; pointer-events:none; z-index:60; overflow:visible}
+  .faller{position:absolute; top:-60px; font-size:22px; transform-origin:center; transition: transform 0.2s linear; will-change: transform, opacity}
+
+  /* floating decorative hearts */
+  .decor{position:absolute; inset:0; pointer-events:none; z-index:2}
+  .decor i{position:absolute; font-size:18px; opacity:.9; animation: drift linear infinite}
+
+  @keyframes drift{ 0%{transform:translateY(0) rotate(0)} 50%{transform:translateY(-26vh) rotate(60deg)} 100%{transform:translateY(0) rotate(120deg)} }
+
+  footer{margin-top:18px; text-align:center; color:var(--muted); font-weight:700}
+  @media(max-width:720px){ .cardBox{padding:14px} h1{font-size:28px} }
+</style>
+</head>
+<body>
+  <div class="wrap" role="application" aria-labelledby="title">
+    <header>
+      <div class="brand">
+        <div class="badge">For Riya</div>
+        <div class="bigname"><strong class="riya">Riya</strong> — pookie</div>
+      </div>
+      <div style="display:flex; gap:10px; align-items:center">
+        <div class="from">From Mayank 💗</div>
+      </div>
+    </header>
+
+    <main>
+      <h1 id="title">Hi <span class="riya">Riya</span> 🐾✨</h1>
+      <p class="sub">This little page is made only for you — click the buttons to unlock tiny surprises 🌸🍫💗</p>
+
+      <nav class="actions" role="toolbar" aria-label="Surprise actions">
+        <button class="btn" id="aboutBtn">About Riya 💕</button>
+        <button class="btn secondary" id="sweetBtn">Sweet Surprise 🌸🍫</button>
+        <button class="btn" id="whyBtn">Why I like you ✨</button>
+        <button class="btn ghost" id="emojiBtn">Emoji Rain 🌧️</button>
+      </nav>
+
+      <div class="cardArea" aria-live="polite">
+        <div class="cardBox" id="cardBox">
+          <div id="intro"><strong>Hey Riya!</strong> This is made especially for you. Click any button to reveal something sweet. 🎀</div>
+          <div class="proposal" id="proposalBox" role="status" aria-atomic="true"></div>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top:16px">
+        <button class="btn" id="bigBtn" style="padding:12px 28px; font-size:18px">Big Surprise 💖</button>
+      </div>
+    </main>
+  </div>
+
+  <div class="fall-wrap" id="fallWrap" aria-hidden="true"></div>
+  <div class="decor" id="decor"></div>
+
+<script>
+  // Personalization
+  const HER = 'Riya';
+  const SENDER = 'Mayank';
+
+  // Short utilities
+  const $ = (q) => document.querySelector(q);
+  const $$ = (q) => Array.from(document.querySelectorAll(q));
+
+  // Elements
+  const aboutBtn = $('#aboutBtn');
+  const sweetBtn = $('#sweetBtn');
+  const whyBtn = $('#whyBtn');
+  const emojiBtn = $('#emojiBtn');
+  const bigBtn = $('#bigBtn');
+  const cardBox = $('#cardBox');
+  const intro = $('#intro');
+  const proposalBox = $('#proposalBox');
+  const fallWrap = $('#fallWrap');
+  const decor = $('#decor');
+
+  // Seed floating decor hearts/stars
+  (function seedDecor(){
+    const icons = ['💗','💖','✨','🌸','💕'];
+    for(let i=0;i<24;i++){
+      const el = document.createElement('i');
+      el.textContent = icons[i % icons.length];
+      el.style.left = (5 + Math.random()*88)+'%';
+      el.style.top = (5 + Math.random()*88)+'%';
+      el.style.fontSize = (12 + Math.random()*22)+'px';
+      el.style.animationDuration = (8 + Math.random()*10)+'s';
+      el.style.opacity = 0.9 - Math.random()*0.3;
+      decor.appendChild(el);
+    }
+  })();
+
+  // Small burst helpers
+  function spawnFaller(symbol, x, delay=0){
+    const el = document.createElement('div');
+    el.className = 'faller';
+    el.textContent = symbol;
+    el.style.left = (x || (5 + Math.random()*90)) + 'vw';
+    el.style.fontSize = (18 + Math.random()*30) + 'px';
+    el.style.transition = 'transform 3s linear, opacity 3s';
+    fallWrap.appendChild(el);
+    setTimeout(()=> {
+      const finalY = window.innerHeight * (0.6 + Math.random()*0.35);
+      const rot = Math.random()*120 - 60;
+      el.style.transform = `translateY(${finalY}px) rotate(${rot}deg)`;
+      el.style.opacity = 0.02;
+    }, delay + 30);
+    setTimeout(()=> el.remove(), 3600 + (delay||0));
+  }
+
+  function emojiRain(count=40){
+    const pool = ['🌸','🍫','🥰','✨','💝','💕'];
+    for(let i=0;i<count;i++){
+      setTimeout(()=> spawnFaller(pool[Math.floor(Math.random()*pool.length)], Math.random()*100, 0), i*30);
+    }
+  }
+
+  function confettiLite(n=60){
+    // small canvas-free confetti via many small fallers
+    const colors = ['💖','✨','💝','💕','🌸'];
+    for(let i=0;i<n;i++) spawnFaller(colors[Math.floor(Math.random()*colors.length)], Math.random()*100, i*20);
+  }
+
+  // Button behaviours
+  aboutBtn.addEventListener('click', ()=>{
+    proposalBox.style.display = 'none';
+    intro.style.display = 'block';
+    cardBox.innerHTML = `<strong>About ${HER} 💕</strong>
+      <p style="margin-top:8px;color:var(--muted)">${HER}, tumhara smile, tumhari sweetness aur tumhari choti choti batein sab kuch special hai. Tum choti choti cheezon mein khushi dhoond leti ho — aur main tumhe isliye bahut pasand karta hoon. 🌸</p>`;
+    confettiLite(28);
+    emojiRain(20);
+  });
+
+  whyBtn.addEventListener('click', ()=>{
+    proposalBox.style.display = 'none';
+    intro.style.display = 'block';
+    cardBox.innerHTML = `<strong>Why I like ${HER} ✨</strong>
+      <ul style="margin-top:8px;color:var(--muted)">
+        <li>Tum honest ho</li>
+        <li>Tumhara smile mera favorite hai</li>
+        <li>Tum mere saath safe feel karwati ho</li>
+      </ul>`;
+    confettiLite(24);
+    emojiRain(18);
+  });
+
+  sweetBtn.addEventListener('click', ()=>{
+    proposalBox.style.display = 'none';
+    intro.style.display = 'block';
+    cardBox.innerHTML = `<strong>Sweet surprise unlocked! 🌸🍫</strong>
+      <p style="margin-top:8px;color:var(--muted)">Dekho upar se kuch pyara gir raha hai — enjoy karo!</p>`;
+    // falling sweets & flowers
+    for(let i=0;i<46;i++){
+      setTimeout(()=> spawnFaller( ['🌸','🍫','🍬','💝'][Math.floor(Math.random()*4)], Math.random()*100 ), i*55);
+    }
+    confettiLite(36);
+  });
+
+  emojiBtn.addEventListener('click', ()=>{
+    emojiRain(80);
+    confettiLite(48);
+  });
+
+  // Big surprise -> proposal text + big celebration
+  bigBtn.addEventListener('click', ()=>{
+    intro.style.display = 'none';
+    const line = `Riya 💖, tum meri zindagi ka sabse khoobsurat hissa ho. Tumhari muskaan meri duniya roshan kar deti hai 🌸. Tum meri favorite person ho, meri pookie, meri cutie 💕. Main sirf itna chahta hoon… ki tum hamesha meri life ka hissa raho. Will you be mine? 🥺💗`;
+    proposalBox.innerHTML = line;
+    proposalBox.style.display = 'block';
+    // big celebration
+    for(let i=0;i<120;i++){
+      setTimeout(()=> spawnFaller( ['🌸','🍫','💝','💕'][Math.floor(Math.random()*4)], Math.random()*100 ), i*30);
+    }
+    for(let i=0;i<80;i++){ setTimeout(()=> confettiLite(6), i*120); }
+  });
+
+  // small keyboard easter egg
+  let seq='';
+  window.addEventListener('keydown', e=>{
+    seq = (seq + e.key.toUpperCase()).slice(-4);
+    if(seq === 'RIYA'){ confettiLite(120); emojiRain(60); }
+  });
+
+  // accessibility: make interactive areas focusable
+  $$('.btn').forEach(b=> b.setAttribute('tabindex','0'));
+</script>
+</body>
+</html>
